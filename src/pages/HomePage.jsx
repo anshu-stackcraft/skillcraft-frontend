@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { IoRocket } from "react-icons/io5";
 import { FaChalkboardTeacher, FaBookOpen, FaUsers } from "react-icons/fa";
-import heroImg from "../assets/anshulaptop.png";
+import heroImg from "../assets/upbatch.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 60 },
@@ -26,7 +26,7 @@ const HomePage = () => {
         {/* ========= TEXT ========= */}
         <div className="text-center md:text-left max-w-xl">
 
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
             CBSE Class <span className="text-orange-500">9 to 12</span><br />
             <span className="text-orange-500">Premium Coaching</span>
           </h1>
@@ -45,15 +45,14 @@ const HomePage = () => {
               Join Batch
             </Link>
 
-            <a
-              href="https://youtube.com/"
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              to="/free-classes"
               className="border border-orange-500 px-7 py-3 rounded-xl font-semibold
-            hover:bg-orange-500 hover:text-black transition-all duration-200 active:scale-95"
+  hover:bg-orange-500 hover:text-black transition-all duration-200 active:scale-95"
             >
               Free Classes
-            </a>
+            </Link>
+
           </div>
         </div>
 
@@ -64,7 +63,7 @@ const HomePage = () => {
             src={heroImg}
             alt="Coaching"
             className="
-            w-72 sm:w-[320px] md:w-112.5
+            w-59 sm:w-[320px] md:w-86
             -translate-y-10 sm:-translate-y-14 md:translate-y-0
             rounded-xl
             border border-orange-500/20
@@ -86,12 +85,12 @@ const HomePage = () => {
           Classes We <span className="text-orange-500">Offer</span>
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
           {["Class 9", "Class 10", "Class 11", "Class 12"].map((cls, i) => (
             <motion.div
               key={i}
               whileHover={{ scale: 1.08 }}
-              className="bg-zinc-900 p-8 rounded-2xl border border-zinc-800 hover:border-orange-500 transition cursor-pointer"
+              className="w-full bg-zinc-900 p-8 rounded-2xl border border-zinc-800 hover:border-orange-500 transition cursor-pointer"
             >
               <h3 className="text-xl font-semibold text-orange-500">{cls}</h3>
               <p className="text-gray-400 mt-2 text-sm">
@@ -101,6 +100,7 @@ const HomePage = () => {
           ))}
         </div>
       </section>
+
 
       {/* ================= FEATURES ================= */}
       <section className="py-24 px-6 md:px-24 bg-zinc-950">
