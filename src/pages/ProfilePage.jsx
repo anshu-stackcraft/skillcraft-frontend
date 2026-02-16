@@ -81,7 +81,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-black px-4 py-20 text-white">
+    <div className="min-h-screen bg-linear-to-br from-black via-zinc-900 to-black px-4 py-20 text-white">
       <div className="max-w-4xl mx-auto bg-zinc-900/80 backdrop-blur-xl border border-orange-500/30 rounded-3xl p-12 shadow-2xl">
 
         <h2 className="text-4xl font-bold text-center mb-12">

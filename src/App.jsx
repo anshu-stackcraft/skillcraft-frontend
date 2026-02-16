@@ -2,22 +2,17 @@ import { Routes, Route, useLocation, Navigate, Outlet, } from "react-router-dom"
 import { useEffect } from "react";
 import Home from "./pages/HomePage";
 import Nav from "./components/layout/Nav";
-import GetInTouch from "./components/GetInTouch";
-import DesignSection from "./components/DesignSection";
-import Projects from "./pages/Projects";
-import About from "./pages/About";
+
 import Footer from "./components/layout/Footer";
 import Logout from "./components/auth/Logout";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import HireMe from "./pages/HireMe";
-import Resume from "./pages/Resume";
-import ProfilePage from "./pages/ProfilePage";
+
 import FreeClasses from "./pages/FreeClasses";
-import Class9 from "./components/classes/Class9";
-import Class10 from "./components/classes/Class10";
-import Class11 from "./components/classes/Class11";
-import Class12 from "./components/classes/Class12";
+import Class9 from "./pages/classes/Class9";
+import Class10 from "./pages/classes/Class10";
+import Class11 from "./pages/classes/Class11";
+import Class12 from "./pages/classes/Class12";
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
@@ -47,10 +42,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/getintuch" element={<GetInTouch />} />
-        <Route path="/design" element={<DesignSection />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/free-classes" element={<FreeClasses />} />  {/* 👈 new route */}
+        <Route path="/freeclasses" element={<FreeClasses />} />  {/* 👈 new route */}
         <Route path="/class9" element={<Class9 />} />
         <Route path="/class10" element={<Class10 />} />
         <Route path="/class11" element={<Class11 />} />
@@ -59,11 +51,7 @@ function App() {
 
         {/* 🔐 Private Routes */}
         <Route element={<PrivateRoute />}>
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/hireme" element={<HireMe />} />
-          <Route path="/resume" element={<Resume />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Routes>
 

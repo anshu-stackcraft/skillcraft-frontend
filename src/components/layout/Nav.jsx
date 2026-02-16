@@ -10,7 +10,7 @@ export default function Navbar() {
     const menuItems = [
         { name: "Courses", path: "/courses" },
         { name: "Live", path: "/live" },
-        { name: "Videos", path: "/videos" },
+        { name: "Free Classes", path: "/freeclasses" },
     ];
 
     return (

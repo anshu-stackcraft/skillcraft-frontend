@@ -31,7 +31,7 @@ const HomePage = () => {
             <span className="text-orange-500">Premium Coaching</span>
           </h1>
 
-          <p className="text-gray-400 text-base sm:text-lg leading-relaxed mb-8">
+          <p className="text-gray-400 text-base sm:text-lg leading-relaxed mb-4">
             Live interactive classes. <br />
             Smart notes & regular tests. <br />
             Clear concepts. Higher marks.
@@ -46,7 +46,7 @@ const HomePage = () => {
             </Link>
 
             <Link
-              to="/free-classes"
+              to="/freeclasses"
               className="border border-orange-500 px-7 py-3 rounded-xl font-semibold
   hover:bg-orange-500 hover:text-black transition-all duration-200 active:scale-95"
             >
@@ -57,7 +57,7 @@ const HomePage = () => {
         </div>
 
         {/* ========= IMAGE ========= */}
-        <div className="relative mt-16 md:mt-0">
+        <div className="relative mt-15 md:mt-0">
 
           <img
             src={heroImg}
