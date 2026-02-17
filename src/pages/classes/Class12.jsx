@@ -44,7 +44,7 @@ const Class12 = () => {
     <div className="min-h-screen bg-black text-white">
 
       {/* ================= HERO ================= */}
-      <section className="text-center py-24 px-6 bg-gradient-to-br from-black via-zinc-900 to-black">
+      <section className="text-center py-24 px-6 bg-linear-to-br from-black via-zinc-900 to-black">
         <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
           Class 12 <span className="text-orange-500">Subjects</span>
         </h1>
@@ -84,7 +84,7 @@ const Class12 = () => {
                   {/* Glow Effect */}
                   <div className="absolute inset-0 rounded-2xl opacity-0 
                                   group-hover:opacity-100 
-                                  bg-gradient-to-br from-orange-500/10 to-transparent 
+                                  bg-linear-to-br from-orange-500/10 to-transparent 
                                   transition" />
 
                   <div className="relative z-10">

@@ -44,7 +44,7 @@ const Class9 = () => {
               {/* Glow Effect */}
               <div className="absolute inset-0 rounded-2xl opacity-0 
                               group-hover:opacity-100 
-                              bg-gradient-to-br from-orange-500/10 to-transparent 
+                              bg-linear-to-br from-orange-500/10 to-transparent 
                               transition" />
 
               <div className="relative z-10">
