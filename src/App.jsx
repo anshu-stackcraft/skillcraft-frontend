@@ -14,6 +14,7 @@ import Class10 from "./pages/classes/Class10";
 import Class11 from "./pages/classes/Class11";
 import Class12 from "./pages/classes/Class12";
 import  Video from "./pages/videos/YouTubePlayer";
+import Home1 from "./pages/Home";
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/class11" element={<Class11 />} />
         <Route path="/class12" element={<Class12 />} />
         <Route path="/video" element={<Video />} />
+        <Route path="/home1" element={<Home1 />} />
 
 
 
