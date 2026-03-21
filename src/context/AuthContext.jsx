@@ -1,10 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../services/axios";
+import { AuthContext } from "./auth";
 
-export const AuthContext = createContext(null);
-
-export const AuthProvider = ({ children }) => {
-  // ⚡ FAST BOOT
+export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
     try {
       const stored = localStorage.getItem("user");
@@ -14,23 +12,19 @@ export const AuthProvider = ({ children }) => {
     }
   });
 
-  const [loading, setLoading] = useState(true);
-  const isAuthenticated = !!user;
+  const [loading, setLoading] = useState(() => {
+    return Boolean(localStorage.getItem("access"));
+  });
 
-  // 🔁 VERIFY TOKEN ONCE
+  const isAuthenticated = Boolean(user);
+
   useEffect(() => {
     const access = localStorage.getItem("access");
-
-    if (!access) {
-      setLoading(false);
-      return;
-    }
+    if (!access) return;
 
     api
       .get("me/", {
-        headers: {
-          Authorization: `Bearer ${access}`,
-        },
+        headers: { Authorization: `Bearer ${access}` },
       })
       .then((res) => {
         setUser(res.data);
@@ -43,32 +37,27 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setLoading(false));
   }, []);
 
-  // 🔐 LOGIN
   const login = async (data) => {
     const res = await api.post("login/", data);
-
-    const { access, refresh, user } = res.data;
+    const { access, refresh, user: nextUser } = res.data;
 
     localStorage.setItem("access", access);
     localStorage.setItem("refresh", refresh);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(nextUser));
 
-    setUser(user);
+    setUser(nextUser);
     return res.data;
   };
 
-  // 📝 REGISTER
   const register = async (data) => {
     return await api.post("register/", data);
   };
 
-  // 🚪 LOGOUT (JWT STYLE)
   const logout = () => {
     localStorage.clear();
     setUser(null);
   };
 
-  // 👤 PROFILE UPDATE SYNC
   const updateUser = (userData) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
@@ -89,12 +78,5 @@ export const AuthProvider = ({ children }) => {
       {!loading && children}
     </AuthContext.Provider>
   );
-};
+}
 
-export const useAuth = () => {
-  const ctx = useContext(AuthContext);
-  if (!ctx) {
-    throw new Error("useAuth must be used inside AuthProvider");
-  }
-  return ctx;
-};

@@ -1,68 +1,99 @@
-import { Routes, Route, useLocation, Navigate, Outlet, } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate, Outlet } from "react-router-dom";
 import { useEffect } from "react";
-import Home from "./pages/HomePage";
-import Nav from "./components/layout/Nav";
 
+import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
-import Logout from "./components/auth/Logout";
+
+import Home from "./pages/HomePage";
+import Courses from "./pages/Courses";
+import Live from "./pages/Live";
+import FreeClasses from "./pages/FreeClasses";
+import ClassSubjects from "./pages/classes/ClassSubjects";
+import SubjectVideos from "./pages/videos/SubjectVideos";
+
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Logout from "./components/auth/Logout";
 
-import FreeClasses from "./pages/FreeClasses";
-import Class9 from "./pages/classes/Class9";
-import Class10 from "./pages/classes/Class10";
-import Class11 from "./pages/classes/Class11";
-import Class12 from "./pages/classes/Class12";
-import  Video from "./pages/videos/YouTubePlayer";
-import Home1 from "./pages/Home";
+import VideoLinksHome from "./pages/admin/VideoLinksHome";
+import VideoLinksClass from "./pages/admin/VideoLinksClass";
 
-import { AuthProvider, useAuth } from "./context/AuthContext";
+import { useAuth } from "./context/auth";
 
 const PrivateRoute = () => {
   const { isAuthenticated, loading } = useAuth();
-
   if (loading) return <div>Loading...</div>;
-
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
-function App() {
+export default function App() {
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  console.log(localStorage.getItem("authToken"));
-
   return (
-    <AuthProvider>
+    <>
       <Nav />
 
       <Routes>
-        {/* 🌍 Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/freeclasses" element={<FreeClasses />} />  
-        <Route path="/class9" element={<Class9 />} />
-        <Route path="/class10" element={<Class10 />} />
-        <Route path="/class11" element={<Class11 />} />
-        <Route path="/class12" element={<Class12 />} />
-        <Route path="/video" element={<Video />} />
-        <Route path="/home1" element={<Home1 />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/live" element={<Live />} />
 
+        <Route path="/freeclasses" element={<FreeClasses />} />
+        <Route path="/freeclasses/class/:classId" element={<ClassSubjects />} />
+        <Route
+          path="/freeclasses/class/:classId/:subjectSlug"
+          element={<SubjectVideos />}
+        />
 
+        {/* Legacy routes (redirects) */}
+        <Route path="/video" element={<Navigate to="/freeclasses" replace />} />
+        <Route
+          path="/class9"
+          element={<Navigate to="/freeclasses/class/9" replace />}
+        />
+        <Route
+          path="/class10"
+          element={<Navigate to="/freeclasses/class/10" replace />}
+        />
+        <Route
+          path="/class11"
+          element={<Navigate to="/freeclasses/class/11" replace />}
+        />
+        <Route
+          path="/class12"
+          element={<Navigate to="/freeclasses/class/12" replace />}
+        />
 
-        {/* 🔐 Private Routes */}
         <Route element={<PrivateRoute />}>
           <Route path="/logout" element={<Logout />} />
+          <Route path="/admin/video-links" element={<VideoLinksHome />} />
+          <Route path="/admin/video-links/:classId" element={<VideoLinksClass />} />
+          <Route
+            path="/admin/video-links/class9"
+            element={<Navigate to="/admin/video-links/9" replace />}
+          />
+          <Route
+            path="/admin/video-links/class10"
+            element={<Navigate to="/admin/video-links/10" replace />}
+          />
+          <Route
+            path="/admin/video-links/class11"
+            element={<Navigate to="/admin/video-links/11" replace />}
+          />
+          <Route
+            path="/admin/video-links/class12"
+            element={<Navigate to="/admin/video-links/12" replace />}
+          />
         </Route>
       </Routes>
 
       <Footer />
-    </AuthProvider>
+    </>
   );
 }
-
-export default App;
