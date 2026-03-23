@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
-import { useAuth } from "../../context/auth";
-
+import { supabase } from "../../supabase";
 
 function Logout() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
 
   useEffect(() => {
     const runLogout = async () => {
       try {
-        await logout(); 
+        // 🔥 Supabase logout
+        await supabase.auth.signOut();
+      } catch (err) {
+        console.error("Logout error:", err.message);
       } finally {
         setTimeout(() => {
           navigate("/login");
@@ -20,11 +21,12 @@ function Logout() {
     };
 
     runLogout();
-  }, [logout, navigate]);
+  }, [navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-black via-zinc-900 to-black px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-zinc-900 to-black px-4">
       <div className="flex flex-col items-center gap-4 bg-zinc-900 border border-orange-500/40 rounded-2xl shadow-xl px-8 py-10">
+
         <div className="p-4 rounded-full bg-orange-500/10 animate-pulse">
           <LogOut size={32} className="text-orange-500" />
         </div>
